@@ -6,18 +6,18 @@
 <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
     <a-marker preset='custom' url='./arjs.patt'>
         <!-- <a-box position='0 0.5 0' material='color: black;opacity: 0.5'></a-box> -->
-        <a-text value="Floor 1 Detected"></a-text>
+        <a-entity text="value: Floor Detected : 4;"></a-entity>
     </a-marker>
     <a-marker preset='custom' url='./pattern.patt'>
         <!-- <a-box position='0 0.5 0' material='color: green;opacity: 0.5'></a-box> -->
-        <a-text value="Floor 2 Detected"></a-text>
+        <a-entity text="value: Floor Detected : 3;"></a-entity>
     </a-marker>
     <a-marker preset='hiro'>
-            <a-text value="Floor 3 Detected"></a-text>
+            <a-entity text="value: Floor Detected : 2;"></a-entity>
         <!-- <a-box position='0 0.5 0' material='color: red;opacity: 0.5'></a-box> -->
     </a-marker>
     <a-marker preset='custom' url='./micheal_dell.patt'>
-        <a-text value="Floor 4 Detected" z-offset="0.5"></a-text>
+        <a-entity text="value: Floor Detected : 1;"></a-entity>
         <!-- <a-box  position='0 0.5 0' material='color: yellow;opacity:0.5'></a-box> -->
     </a-marker>
     <a-entity camera></a-entity>
