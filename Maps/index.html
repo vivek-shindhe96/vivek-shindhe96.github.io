@@ -136,9 +136,9 @@
                 east: 77.58628,
                 west: 77.58605
             };
-            addMarker({lat:12.927695403933045,lng:77.58621961060237},map,"waypoint");
-            addMarker({lat:12.927498029980026,lng:77.58622363391589},map,"waypoint");
-            addMarker({lat:12.927341176396137,lng:77.58623436275195},map,"waypoint");
+            addMarker({lat:12.927695403933045,lng:77.58621961060237},map,"");
+            addMarker({lat:12.927498029980026,lng:77.58622363391589},map,"");
+            addMarker({lat:12.927341176396137,lng:77.58623436275195},map,"");
             addMarker({ lat: 12.927495, lng: 77.586150 }, map, "Reception");
 
             addMarker({ lat: 12.927680, lng: 77.586270 }, map, "Pratap Cabin");
@@ -159,7 +159,7 @@
        function addMarker(location,map,name) {
          // body...
          
-         if(name==='waypoint'){
+         if(name===''){
 
           var marker = new google.maps.Marker({
                 position: location,
