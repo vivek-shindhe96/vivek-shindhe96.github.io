@@ -18,34 +18,38 @@
     </a-entity>
 
     <a-marker preset='custom' url='./arjs.patt'>
-        <script>sendDataToAndroid("2")</script>
+        
         <!-- <a-box position='0 0.5 0' material='color: black;opacity: 0.5'></a-box> -->
         <a-entity position="0 0.4 0" geometry="primitive: plane; width: auto; height: auto" material="color: #eee" scale="3 3 3"
                   text="color: blue; align: center; value:FLOOR 2 DETECTED; width: 2; " rotation="-90 0 0">
-        </a-entity>  
+                  <script>sendDataToAndroid("2")</script>
+                </a-entity>  
         
     </a-marker>
 
     <a-marker preset='custom' url='./pattern.patt'>
-        <script>sendDataToAndroid("1")</script>
         <!-- <a-box position='0 0.5 0' material='color: green;opacity: 0.5'></a-box> -->
     <a-entity position="0 0.4 0" geometry="primitive: plane; width: auto; height: auto" material="color: #eee" rotation="-90 0 0" scale="2 2 2"
                   text="color: blue; align: center; value:FLOOR 1 DETECTED; width: 2; ">
-        </a-entity> 
+                  <script>sendDataToAndroid("1")</script>
+
+                </a-entity> 
         
     </a-marker>
     <a-marker preset='hiro'>
-            <script>sendDataToAndroid("4")</script>
         <a-entity position="0 0.4 0" geometry="primitive: plane; width: auto; height: auto" material="color: #eee" scale="2 2 2" rotation="-90 0 0"
             text="color: blue; align: center; value:FLOOR 4 DETECTED; width: 2; ">
+            <script>sendDataToAndroid("4")</script>
+
         </a-entity> 
         <!-- <a-box position='0 0.5 0' material='color: red;opacity: 0.5'></a-box> -->
     </a-marker>
     <a-marker preset='custom' url='./micheal_dell.patt'>
-        <script>sendDataToAndroid("3")</script>
         <a-entity position="0 0.4 0" geometry="primitive: plane; width: auto; height: auto" material="color: #eee" scale="3 3 3" rotation="-90 0 0"
                   text="color: blue; align: center; value:FLOOR 3 DETECTED; width: 2; ">
-        </a-entity> 
+                  <script>sendDataToAndroid("3")</script>
+
+                </a-entity> 
     <!-- <a-box  position='0 0.5 0' material='color: yellow;opacity:0.5'></a-box> -->
     </a-marker>
     <a-marker preset='custom' url='./micheal_dell2.patt'>
