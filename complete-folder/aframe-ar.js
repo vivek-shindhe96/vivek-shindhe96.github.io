@@ -8264,6 +8264,7 @@ AFRAME.registerComponent('arjs-anchor', {
       if(_this.el.object3D.visible){
         this.el.emit('markerFound');
         //alert("found this shit");
+        alert(""+this._arAnchor);
       }  
     }else if( _this._arAnchor.parameters.changeMatrixMode === 'cameraTransformMatrix' ){
       _this.el.sceneEl.object3D.visible = this._arAnchor.object3d.visible
