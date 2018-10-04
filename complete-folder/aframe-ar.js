@@ -8150,7 +8150,7 @@ AFRAME.registerComponent('arjs-anchor', {
   },
   init: function () {
     var _this = this
-
+    
     // get arjsSystem
     var arjsSystem = this.el.sceneEl.systems.arjs || this.el.sceneEl.systems.artoolkit
 
@@ -8264,7 +8264,7 @@ AFRAME.registerComponent('arjs-anchor', {
       if(_this.el.object3D.visible){
         this.el.emit('markerFound');
         //alert("found this shit");
-        alert(JSON.stringify(this.data));
+        alert(this.data.patternUrl);
       }  
     }else if( _this._arAnchor.parameters.changeMatrixMode === 'cameraTransformMatrix' ){
       _this.el.sceneEl.object3D.visible = this._arAnchor.object3d.visible
