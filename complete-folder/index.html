@@ -11,11 +11,11 @@
                     alert(this.data);
                 }
             });
-                function sendDataToAndroid(number){
-                    alert(number);
-                    MyFunction.onFloorFound(number);
+                // function sendDataToAndroid(number){
+                //     alert(number);
+                //     MyFunction.onFloorFound(number);
                     
-                }
+                // }
             </script>
     <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
     <a-entity position="0 0.4 0" geometry="primitive: plane; width: auto; height: auto" material="color: #eee" scale="3 3 3"
@@ -37,7 +37,7 @@
         <!-- <a-box position='0 0.5 0' material='color: green;opacity: 0.5'></a-box> -->
     <a-entity position="0 0.4 0" geometry="primitive: plane; width: auto; height: auto" material="color: #eee" rotation="-90 0 0" scale="2 2 2"
                   text="color: blue; align: center; value:FLOOR 1 DETECTED; width: 2; ">
-                  <script>sendDataToAndroid("1")</script>
+                  <!-- <script>sendDataToAndroid("1")</script> -->
 
                 </a-entity> 
         
@@ -45,7 +45,7 @@
     <a-marker preset='hiro'>
         <a-entity position="0 0.4 0" geometry="primitive: plane; width: auto; height: auto" material="color: #eee" scale="2 2 2" rotation="-90 0 0"
             text="color: blue; align: center; value:FLOOR 4 DETECTED; width: 2; ">
-            <script>sendDataToAndroid("4")</script>
+            <!-- <script>sendDataToAndroid("4")</script> -->
 
         </a-entity> 
         <!-- <a-box position='0 0.5 0' material='color: red;opacity: 0.5'></a-box> -->
@@ -53,7 +53,7 @@
     <a-marker preset='custom' url='./micheal_dell.patt'>
         <a-entity position="0 0.4 0" geometry="primitive: plane; width: auto; height: auto" material="color: #eee" scale="3 3 3" rotation="-90 0 0"
                   text="color: blue; align: center; value:FLOOR 3 DETECTED; width: 2; ">
-                  <script>sendDataToAndroid("3")</script>
+                  <!-- <script>sendDataToAndroid("3")</script> -->
 
                 </a-entity> 
     <!-- <a-box  position='0 0.5 0' material='color: yellow;opacity:0.5'></a-box> -->
