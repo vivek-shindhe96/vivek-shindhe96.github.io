@@ -136,52 +136,123 @@
                 east: 77.58628,
                 west: 77.58605
             };
-            addMarker({lat:12.927695403933045,lng:77.58621961060237},map,"");
-            addMarker({lat:12.927498029980026,lng:77.58622363391589},map,"");
-            addMarker({lat:12.927341176396137,lng:77.58623436275195},map,"");
-            addMarker({ lat: 12.927495, lng: 77.586150 }, map, "Reception");
-
-            addMarker({ lat: 12.927680, lng: 77.586270 }, map, "Pratap Cabin");
-            addMarker({ lat: 12.927305, lng: 77.586263 }, map, "Vikram Cabin");
-            addMarker({ lat: 12.927316, lng: 77.586130 }, map, "KFC");
+            // addMarker({lat:12.927695403933045,lng:77.58621961060237},map,"");
+            // addMarker({lat:12.927498029980026,lng:77.58622363391589},map,"");
+            // addMarker({lat:12.927341176396137,lng:77.58623436275195},map,"");
+            
+            // addMarker({ lat: 12.927495, lng: 77.586150 }, map, "Reception");
+            // addMarker({ lat: 12.927680, lng: 77.586270 }, map, "Pratap Cabin");
+            // addMarker({ lat: 12.927305, lng: 77.586263 }, map, "Vikram Cabin");
+            // addMarker({ lat: 12.927316, lng: 77.586130 }, map, "KFC");
 
 
         historicalOverlay = new google.maps.GroundOverlay(
             './333.jpg',
               imageBounds,{clickable:false});
         google.maps.event.addListener(map,'click',function(event){
-           addMarker(event.latLng,map,"waypoint");
+           addMarker(event.latLng,map,null);
+        });
+        google.maps.event.addListener(map,'rightclick',function(event){
+            addPOIMarker(event.latLng,map,null);
         });
         historicalOverlay.setMap(map);
+      }
+
+      function addPOIMarker(location,map,name){
+          var poiName=prompt("Enter name of POI","Vikram's Cabin");
+          if(poiName==null||poiName==""||poiName=="Vikram's Cabin"){
+            // var marker = new google.maps.Marker({
+            //     position: location,
+            //     label: "Unnamed",
+            //     map: map,
+            //     // icon:"http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+            //     animation: google.maps.Animation.DROP,
+            // }); 
+          }else{
+            var marker = new google.maps.Marker({
+                position: location,
+                label: poiName,
+                map: map,
+                // icon:"http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+                animation: google.maps.Animation.DROP,
+            });
+          }
+          marker.addListener('click',function(event){
+            console.log(JSON.stringify(event.latLng));
+            var infoWindow = new google.maps.InfoWindow({
+                content:'Location:'+(event.latLng)
+            });
+            infoWindow.open(map,marker);
+          });
       }
     
 
        function addMarker(location,map,name) {
          // body...
-         
-         if(name===''){
-
-          var marker = new google.maps.Marker({
+        // var txt;
+        if(name!=null){
+            if(name!=""){
+                var marker = new google.maps.Marker({
+                position: location,
+                // label: name,
+                map: map,
+                // icon:"http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+                animation: google.maps.Animation.DROP,
+            });    
+            }else{
+                var marker = new google.maps.Marker({
                 position: location,
                 label: name,
                 map: map,
                 icon:"http://maps.google.com/mapfiles/ms/icons/green-dot.png",
                 animation: google.maps.Animation.DROP,
             });
-         }else{
-         var marker = new google.maps.Marker({
+            }
+            
+        }else{
+            var namePOI = prompt("Please Name this POI","Ex: Waypoint 4");
+        if(namePOI===null||namePOI===""||namePOI==="Ex: Waypoint 4"){
+               
+        //   var marker = new google.maps.Marker({
+        //         position: location,
+        //         label: "Unnamed",
+        //         map: map,
+        //         icon:"http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+        //         animation: google.maps.Animation.DROP,
+        //     });
+        }else{
+            var marker = new google.maps.Marker({
                 position: location,
-                label: name,
+                label: namePOI,
                 map: map,
+                icon:"http://maps.google.com/mapfiles/ms/icons/green-dot.png",
                 animation: google.maps.Animation.DROP,
             });
+        }
+        
+        // }
+        //  if(name===''){
+          
+        //  }else{
+        //  var marker = new google.maps.Marker({
+        //         position: location,
+        //         label: name,
+        //         map: map,
+        //         animation: google.maps.Animation.DROP,
+        //     });
 
           }
 
           marker.addListener('click',function(event){
             console.log(JSON.stringify(event.latLng));
+            var infoWindow = new google.maps.InfoWindow({
+                content:'Location:'+(event.latLng)
+            });
+            infoWindow.open(map,marker);
           });
        }
+
+       
 
 
     </script>
