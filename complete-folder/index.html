@@ -1,19 +1,10 @@
 <!doctype HTML>
 <html>
 <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
-<script src="aframe-ar.js"> </script>
+<script type="text/javascript" src="aframe-ar.js"> </script>
 
 <body style='margin : 0px; overflow: hidden;'>
-        <script>
-            AFRAME.registerComponent('foundMarker',{
-                init:function(){
-                    var el = this.el;
-                    el.addEventListener('markerFound',function(){
-                        alert("markerFound");
-                    });
-                }
-            })    
-        </script>
+        
     <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
     <a-entity position="0 0.4 0" geometry="primitive: plane; width: auto; height: auto" material="color: #eee" scale="3 3 3"
     text="color: blue; align: center; value:FLOOR 2 DETECTED; width: 2; ">
