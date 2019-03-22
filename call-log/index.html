@@ -37,7 +37,14 @@
 				</div>
 				
 			</div>
+			<div class="row">
+
+				<label id = "status">Status: </label>
+
+				
+			</div>
 		</form>
+
 		<button type="button" class="btn btn-primary" onclick="addLogs()">Add Logs</button>
 	</div>
 
@@ -52,14 +59,17 @@
 		var message = "https://script.google.com/macros/s/AKfycbykYSP1k3kkstlYq8Q6y5LJRiYkPZG1uGE3fSsM_YN8XWuD1yY/exec?name="+name+"&year="+year+"&month="+month+"&date="+date;
 		
 		var xhr = new XMLHttpRequest();
-		
-		xhr.open("GET", message, true);
+xhr.open('GET', message);
+		document.getElementById("status").innerHTML="Status: Pending"
+		// xhr.open("GET", message, true);
 		xhr.onload = function (e) {
 		  if (xhr.readyState === 4) {
 		    if (xhr.status === 200) {
 		      console.log(xhr.responseText);
+		      document.getElementById("status").innerHTML="Status: "+xhr.responseText;
 		    } else {
 		      console.error(xhr.statusText);
+		      document.getElementById("status").innerHTML="Status: "+xhr.statusText+". Please contact admin";
 		    }
 		  }
 		};
