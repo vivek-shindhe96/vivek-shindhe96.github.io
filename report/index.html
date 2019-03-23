@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body onload="fetchSummaryData()">
+	<div class="container">
+		<h2>Summary Report Generator Tool</h2>
+        <hr>
+    </div>
+    <div class="container">
+        <div class="dropdown">
+            <button id="dropdown" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Loading
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu" id="recruiterList" >
+              
+            </ul>
+          </div>
+        <hr>
+        <div class="container">
+            <h4 id="nameOfRec">Name</h4>
+        </div>
+          <div class="dropdown">
+          <button id="dropdownDataType" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Charts
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu" id="chartList" >
+              <li>Last 90 days</li>
+              <li>Last 30 days</li>
+              <li>Last 7 days</li>
+            </ul>  
+          </div>
+        </div>
+        <br>
+    <div class="container">
+        <div id="chart_div"></div>
+    </div>
+
+
+
+<script type="text/javascript">
+
+    var jsonResponseObj;
+    var recIndex;
+    var ul = document.getElementById("recruiterList");
+    var chartUl = document.getElementById("chartList");
+    var dropdownBtn = document.getElementById("dropdown");
+    chartUl.onclick = function(event){
+
+        var option = getEventTarget(event);
+        document.getElementById("dropdownDataType").innerHTML=option.innerHTML;
+        if(jsonResponseObj!=null && recIndex!=null){
+            console.log(jsonResponseObj.recs[recIndex-1].data);
+            switch(option.innerHTML){
+                case "Last 90 days":
+                drawChart(option.innerHTML,jsonResponseObj.recs[recIndex-1].data.lastNinetdyDays);
+                break;
+                case "Last 30 days":
+                drawChart(option.innerHTML,jsonResponseObj.recs[recIndex-1].data.lastThirtyDays);
+                break;
+                case "Last 7 days":
+                    drawChart(option.innerHTML,jsonResponseObj.recs[recIndex-1].data.lastSevenDays);
+                break;
+            }
+            
+        }
+        // document.getElementById("nameOfRec").innerHTML=option.innerHTML;
+    }
+    ul.onclick = function(event){
+        var option = getEventTarget(event);
+        dropdownBtn.innerHTML=option.innerHTML;
+        recIndex = Array.prototype.indexOf.call(ul.childNodes, option);
+        document.getElementById("nameOfRec").innerHTML=option.innerHTML;
+        document.getElementById("chart_div").style.display="none";
+        // alert(option.innerHTML);
+    }
+
+        google.charts.load('current', {'packages':['corechart','bar']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        // google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart(typeOfChart,dataFromJson) {
+
+        // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', typeOfChart);
+            data.addColumn('number', 'Minutes');
+            data.addRows([
+                ['Avg No Calls Per day', dataFromJson.avgNumCallPerDay],
+                ['Avg No Two Min Calls', dataFromJson.avgNumCallsTwoMin],
+                ['Total Mins Per Day', dataFromJson.totalMinPerDay],
+                ['Avg Outgoing 2+ Min Calls', dataFromJson.avgDurTwoPlusMin],
+            ]);
+
+            // Set chart options
+            var options = {'title':'How Much Pizza I Ate Last Night',
+                            'width':700,
+                            'height':300};
+
+            // Instantiate and draw our chart, passing in some options.
+        document.getElementById("chart_div").style.display="block";
+            
+            var chart = new google.charts.Bar(document.getElementById('chart_div'));
+            chart.draw(data, options);
+
+            
+
+        }
+
+        function getEventTarget(e) {
+            e = e || window.event;
+            return e.target || e.srcElement; 
+        }
+	function fetchSummaryData(){
+
+		var message = "https://script.google.com/macros/s/AKfycbykYSP1k3kkstlYq8Q6y5LJRiYkPZG1uGE3fSsM_YN8XWuD1yY/exec";
+
+
+		var xhr = new XMLHttpRequest();
+        xhr.open('GET', message);
+		// document.getElementById("status").innerHTML="Status: Pending"
+		// xhr.open("GET", message, true);
+		xhr.onload = function (e) {
+		  if (xhr.readyState === 4) {
+		    if (xhr.status === 200) {
+                dropdownBtn.innerHTML="Select Recruiter"
+		      console.log(JSON.parse(xhr.responseText));
+             jsonResponseObj = JSON.parse(xhr.responseText);
+             updateList(jsonResponseObj);
+		    //   document.getElementById("status").innerHTML="Status: "+xhr.responseText;
+		    } else {
+		      console.error(xhr.statusText);
+		    //   document.getElementById("status").innerHTML="Status: "+xhr.statusText+". Please contact admin";
+
+		    }
+		  }
+		};
+		xhr.onerror = function (e) {
+		  console.error(xhr.statusText);
+		};
+		xhr.send(null);    
+    }
+
+    function updateList(jsonResponseObj){
+        var recs = jsonResponseObj.recs;
+        for(var i=0;i<recs.length;i++){
+            console.log(recs[i].name);
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(recs[i].name));
+            ul.appendChild(li);
+        }
+
+    
+
+}
+
+</script>
+
+</body>
+</html>
